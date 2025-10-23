@@ -1,0 +1,70 @@
+name: Claude Code Action
+on:
+  pull_request:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  claude:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+4. Save this file and commit it to GitHub
+
+---
+
+## **STEP 8: Test It Out!**
+
+Now let's test if it works:
+
+### **Option A: Test with an Issue**
+
+1. In your GitHub repository, click **"Issues"** at the top
+2. Click **"New issue"**
+3. Give it a title like: `Test: Create a Hello World app`
+4. In the description, write: `Create a simple Python script that prints "Hello World"`
+5. Click **"Submit new issue"**
+6. In the comment box, type: `@claude create a hello world app`
+7. Press **"Comment"**
+
+Claude should automatically respond and create code!
+
+### **Option B: Test with a Pull Request**
+
+1. Create a new branch in your repo (don't worry if you don't know how - GitHub can guide you)
+2. Create a pull request
+3. Comment: `@claude review this`
+4. Claude will review your code!
+
+---
+
+## **What Happens Next (The Magic Part)**
+
+Once everything is set up:
+
+- **When you tag @claude in comments**, Claude reads what you asked
+- **Claude makes code changes** and pushes them to your repo
+- **Claude creates pull requests** for you to review
+- **Claude reviews other people's code** automatically
+- **Everything works 24/7** without you doing anything!
+
+---
+
+## **Common Commands You Can Use**
+
+Once it's working, try these commands in GitHub comments:
+```
+@claude review this
+@claude fix the bug in this file
+@claude add error handling to this function
+@claude write unit tests for this
+@claude optimize this code for performance
+@claude add comments to this code
