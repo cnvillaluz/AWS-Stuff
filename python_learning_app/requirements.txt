@@ -1,0 +1,6 @@
+# Python Learning App Requirements
+# This application uses only Python standard library
+# Minimum Python version: 3.6+
+
+# No external dependencies required!
+# All you need is Python 3.6 or higher
