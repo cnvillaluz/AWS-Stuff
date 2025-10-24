@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Exercises - Kubernetes Learning Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Hands-On Exercises</h1>
+    <p>Practice what you've learned with these hands-on exercises. Each exercise includes YAML examples and step-by-step instructions.</p>
+
+    <div class="alert alert-info">
+        <strong>Note:</strong> These exercises require a working Kubernetes cluster. Use Minikube, Kind, or kubeadm for practice.
+    </div>
+
+    <div class="exercise-section">
+        <h2 style="color: #4caf50;">Basic Exercises</h2>
+        <ul class="exercise-list">
+            {% for ex in exercises.basics %}
+            <li>
+                <a href="/exercise/{{ ex.level }}/{{ ex.file }}" class="exercise-link">
+                    {{ ex.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="exercise-section">
+        <h2 style="color: #2196F3;">Intermediate Exercises</h2>
+        <ul class="exercise-list">
+            {% for ex in exercises.intermediate %}
+            <li>
+                <a href="/exercise/{{ ex.level }}/{{ ex.file }}" class="exercise-link">
+                    {{ ex.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="exercise-section">
+        <h2 style="color: #ff9800;">Advanced Exercises</h2>
+        <ul class="exercise-list">
+            {% for ex in exercises.advanced %}
+            <li>
+                <a href="/exercise/{{ ex.level }}/{{ ex.file }}" class="exercise-link">
+                    {{ ex.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<style>
+    .exercise-section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    .exercise-list {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .exercise-list li {
+        margin: 0.75rem 0;
+    }
+
+    .exercise-link {
+        color: #326ce5;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .exercise-link:hover {
+        color: #1a4b9e;
+        transform: translateX(5px);
+    }
+</style>
+{% endblock %}

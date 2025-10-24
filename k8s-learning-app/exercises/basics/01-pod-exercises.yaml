@@ -1,0 +1,118 @@
+# Basic Pod Exercises
+
+## Exercise 1: Create a Simple Pod
+# Create a pod named nginx-pod using nginx:1.21 image
+# Imperative command:
+# kubectl run nginx-pod --image=nginx:1.21
+
+---
+# Exercise 2: Pod with Environment Variables
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo $MY_VAR && sleep 3600"]
+    env:
+    - name: MY_VAR
+      value: "Hello Kubernetes"
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+
+# Task: Create this pod and verify environment variables
+# kubectl apply -f <file>
+# kubectl logs env-pod
+
+---
+# Exercise 3: Multi-Container Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "while true; do echo $(date) >> /var/log/date.txt; sleep 5; done"]
+
+# Task: Create pod and exec into busybox container
+# kubectl apply -f <file>
+# kubectl exec -it multi-container -c busybox -- sh
+# cat /var/log/date.txt
+
+---
+# Exercise 4: Pod with Resource Limits
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+
+# Task: Create pod and verify resource allocation
+# kubectl apply -f <file>
+# kubectl describe pod resource-pod | grep -A 5 Limits
+
+---
+# Exercise 5: Pod with Init Container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-demo
+spec:
+  initContainers:
+  - name: init-service
+    image: busybox
+    command: ['sh', '-c', 'echo "Initialization complete" > /work-dir/index.html']
+    volumeMounts:
+    - name: workdir
+      mountPath: /work-dir
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: workdir
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: workdir
+    emptyDir: {}
+
+# Task: Create pod and verify init container ran
+# kubectl apply -f <file>
+# kubectl get pod init-demo --watch
+# kubectl logs init-demo -c init-service
+# kubectl port-forward init-demo 8080:80
+# curl localhost:8080
+
+---
+# Practice Tasks:
+# 1. Create a pod imperatively with nginx image
+# 2. Get pod in YAML format: kubectl get pod <name> -o yaml > pod.yaml
+# 3. Edit pod and add a label
+# 4. View pod logs
+# 5. Execute command in pod: kubectl exec <pod> -- ls /
+# 6. Delete pod: kubectl delete pod <name>
+# 7. Create pod from YAML file
+# 8. Port-forward to pod: kubectl port-forward <pod> 8080:80
+# 9. Describe pod and analyze events
+# 10. Create pod with specific restart policy

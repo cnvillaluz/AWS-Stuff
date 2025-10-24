@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}CKA Exam Guide - Kubernetes Learning Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="breadcrumb">
+        <a href="/">Home</a> &raquo; CKA Exam Preparation Guide
+    </div>
+
+    <div class="alert alert-success">
+        <strong>Ready for the CKA Exam?</strong> This comprehensive guide will help you prepare for and pass the Certified Kubernetes Administrator exam.
+    </div>
+
+    <div class="cka-content">
+        {{ content | safe }}
+    </div>
+
+    <div class="navigation">
+        <a href="/" class="btn">Back to Home</a>
+        <a href="/exercises" class="btn">Practice Exercises</a>
+    </div>
+</div>
+
+<style>
+    .breadcrumb {
+        margin-bottom: 2rem;
+        color: #666;
+    }
+
+    .breadcrumb a {
+        color: #326ce5;
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .cka-content {
+        line-height: 1.8;
+    }
+
+    .navigation {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #ddd;
+        display: flex;
+        gap: 1rem;
+    }
+</style>
+{% endblock %}

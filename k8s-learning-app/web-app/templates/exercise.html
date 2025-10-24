@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Kubernetes Learning Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="breadcrumb">
+        <a href="/">Home</a> &raquo; <a href="/exercises">Exercises</a> &raquo; {{ title }}
+    </div>
+
+    <h1>{{ title }}</h1>
+
+    <div class="exercise-content">
+        {{ content | safe }}
+    </div>
+
+    <div class="navigation">
+        <a href="/exercises" class="btn">Back to Exercises</a>
+    </div>
+</div>
+
+<style>
+    .breadcrumb {
+        margin-bottom: 2rem;
+        color: #666;
+    }
+
+    .breadcrumb a {
+        color: #326ce5;
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .exercise-content {
+        line-height: 1.8;
+    }
+
+    .navigation {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #ddd;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,154 @@
+# Storage Exercises - PV, PVC, and StorageClass
+
+## Exercise 1: Create PersistentVolume and PersistentVolumeClaim
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-exercise-1
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /tmp/data
+  storageClassName: manual
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-exercise-1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+  storageClassName: manual
+
+# Task: Create PV and PVC, verify binding
+# kubectl apply -f <file>
+# kubectl get pv
+# kubectl get pvc
+# Verify status is "Bound"
+
+---
+## Exercise 2: Pod Using PVC
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: storage
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: storage
+    persistentVolumeClaim:
+      claimName: pvc-exercise-1
+
+# Task: Create pod and write data to volume
+# kubectl apply -f <file>
+# kubectl exec -it pvc-pod -- bash
+# echo "Hello from PVC" > /usr/share/nginx/html/index.html
+# exit
+# kubectl delete pod pvc-pod
+# Create pod again and verify data persists
+
+---
+## Exercise 3: StorageClass for Dynamic Provisioning
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dynamic-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: fast
+  resources:
+    requests:
+      storage: 1Gi
+
+# Task: Create StorageClass and PVC
+# kubectl apply -f <file>
+# kubectl get sc
+# kubectl get pvc
+# Note: This requires storage provisioner to work
+
+---
+## Exercise 4: StatefulSet with VolumeClaimTemplate
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-headless
+spec:
+  clusterIP: None
+  selector:
+    app: nginx-sts
+  ports:
+  - port: 80
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: nginx-headless
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-sts
+  template:
+    metadata:
+      labels:
+        app: nginx-sts
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Mi
+
+# Task: Create StatefulSet and verify PVCs
+# kubectl apply -f <file>
+# kubectl get pods
+# kubectl get pvc
+# Verify each pod has its own PVC (www-web-0, www-web-1)
+
+---
+# Practice Tasks:
+# 1. Create PV with 5Gi capacity
+# 2. Create PVC requesting 3Gi
+# 3. Verify PVC is bound to PV
+# 4. Create pod using the PVC
+# 5. Write data to the volume
+# 6. Delete pod and verify data persists
+# 7. Create another pod with same PVC
+# 8. Verify data is still there
+# 9. Check PV reclaim policy
+# 10. Delete PVC and check what happens to PV
+# 11. Create StorageClass
+# 12. Practice with different access modes

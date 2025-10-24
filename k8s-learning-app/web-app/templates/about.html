@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}About - Kubernetes Learning Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>About Kubernetes Learning Platform</h1>
+
+    <p>Welcome to the Kubernetes Learning Platform, your comprehensive resource for mastering Kubernetes and preparing for the Certified Kubernetes Administrator (CKA) exam.</p>
+
+    <h2>What is This Application?</h2>
+    <p>This is an interactive learning platform designed to take you from Kubernetes basics to advanced administration concepts. Whether you're just starting your Kubernetes journey or preparing for the CKA certification, this application provides structured learning modules, hands-on exercises, and exam preparation materials.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Structured Learning Path:</strong> Progress from basic to advanced topics in a logical sequence</li>
+        <li><strong>Comprehensive Modules:</strong> Detailed explanations of all Kubernetes concepts</li>
+        <li><strong>Hands-On Exercises:</strong> Practice with real YAML configurations and kubectl commands</li>
+        <li><strong>CKA Exam Preparation:</strong> Focused preparation guide for the CKA certification</li>
+        <li><strong>Best Practices:</strong> Learn industry-standard Kubernetes practices</li>
+        <li><strong>Troubleshooting Guide:</strong> Master debugging and problem-solving skills</li>
+    </ul>
+
+    <h2>Topics Covered</h2>
+
+    <h3>Basic Concepts</h3>
+    <ul>
+        <li>Kubernetes Architecture</li>
+        <li>Pods, Deployments, and Services</li>
+        <li>ConfigMaps and Secrets</li>
+        <li>Namespaces and Resource Management</li>
+    </ul>
+
+    <h3>Intermediate Topics</h3>
+    <ul>
+        <li>Persistent Storage (PV, PVC, StorageClass)</li>
+        <li>StatefulSets and DaemonSets</li>
+        <li>Jobs and CronJobs</li>
+        <li>RBAC and Security</li>
+    </ul>
+
+    <h3>Advanced Topics</h3>
+    <ul>
+        <li>Cluster Maintenance and Upgrades</li>
+        <li>etcd Backup and Restore</li>
+        <li>Troubleshooting and Debugging</li>
+        <li>High Availability</li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <ol>
+        <li>Start with the <a href="/">Basic Modules</a> if you're new to Kubernetes</li>
+        <li>Progress through Intermediate and Advanced modules</li>
+        <li>Practice with the <a href="/exercises">Hands-On Exercises</a></li>
+        <li>Review the <a href="/cka-guide">CKA Exam Guide</a> when ready for certification</li>
+    </ol>
+
+    <h2>Prerequisites</h2>
+    <p>To get the most out of this platform:</p>
+    <ul>
+        <li>Basic understanding of containers and Docker</li>
+        <li>Familiarity with Linux command line</li>
+        <li>A Kubernetes cluster for hands-on practice (Minikube, Kind, or kubeadm)</li>
+    </ul>
+
+    <h2>Recommended Practice Environment</h2>
+    <p>For hands-on practice, we recommend setting up:</p>
+    <ul>
+        <li><strong>Minikube:</strong> For local single-node Kubernetes cluster</li>
+        <li><strong>Kind:</strong> Kubernetes in Docker for quick multi-node clusters</li>
+        <li><strong>kubeadm:</strong> For production-like multi-node clusters</li>
+        <li><strong>Cloud Providers:</strong> GKE, EKS, or AKS for managed Kubernetes</li>
+    </ul>
+
+    <div class="alert alert-info">
+        <strong>Tip:</strong> The best way to learn Kubernetes is by doing. Make sure to try out all the commands and exercises in a real Kubernetes environment!
+    </div>
+
+    <h2>About the CKA Certification</h2>
+    <p>The Certified Kubernetes Administrator (CKA) exam is a performance-based test that validates your skills in:</p>
+    <ul>
+        <li>Cluster architecture, installation, and configuration</li>
+        <li>Workloads and scheduling</li>
+        <li>Services and networking</li>
+        <li>Storage</li>
+        <li>Troubleshooting</li>
+    </ul>
+
+    <p>Visit the <a href="/cka-guide">CKA Exam Guide</a> for detailed preparation strategies, tips, and practice questions.</p>
+
+    <div class="navigation">
+        <a href="/" class="btn">Start Learning</a>
+        <a href="/cka-guide" class="btn">View CKA Guide</a>
+    </div>
+</div>
+
+<style>
+    .navigation {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #ddd;
+        display: flex;
+        gap: 1rem;
+    }
+</style>
+{% endblock %}
