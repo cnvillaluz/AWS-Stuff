@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraform Learning Journey - AWS Edition</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🚀 Terraform Learning Journey</h1>
+                <p>Master Infrastructure as Code with AWS</p>
+            </div>
+            <div class="progress-summary" id="progressSummary">
+                <div class="stat">
+                    <span class="stat-number" id="totalCompleted">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalProgress">0%</span>
+                    <span class="stat-label">Overall Progress</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="currentStreak">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-button active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-button" onclick="showTab('lessons')">📚 Lessons</button>
+            <button class="tab-button" onclick="showTab('practice')">💻 Practice</button>
+            <button class="tab-button" onclick="showTab('labs')">🧪 Labs</button>
+            <button class="tab-button" onclick="showTab('resources')">📖 Resources</button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <section class="welcome">
+                <h2>Welcome to Your Learning Journey! 👋</h2>
+                <p>This interactive application will guide you through learning Terraform with AWS, from basics to advanced concepts. Track your progress, complete lessons, and practice with real AWS examples.</p>
+            </section>
+
+            <!-- Progress Overview -->
+            <section class="progress-cards">
+                <div class="progress-card beginner">
+                    <div class="card-header">
+                        <h3>🌱 Beginner</h3>
+                        <span class="progress-badge" id="beginnerProgress">0/8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="beginnerBar" style="width: 0%"></div>
+                    </div>
+                    <p>Terraform basics, HCL syntax, first resources</p>
+                    <button class="btn btn-primary" onclick="goToSection('beginner')">Continue Learning</button>
+                </div>
+
+                <div class="progress-card intermediate">
+                    <div class="card-header">
+                        <h3>🌿 Intermediate</h3>
+                        <span class="progress-badge" id="intermediateProgress">0/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="intermediateBar" style="width: 0%"></div>
+                    </div>
+                    <p>Variables, modules, state management</p>
+                    <button class="btn btn-secondary" onclick="goToSection('intermediate')">Start</button>
+                </div>
+
+                <div class="progress-card advanced">
+                    <div class="card-header">
+                        <h3>🌳 Advanced</h3>
+                        <span class="progress-badge" id="advancedProgress">0/12</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="advancedBar" style="width: 0%"></div>
+                    </div>
+                    <p>Dynamic blocks, functions, multi-region</p>
+                    <button class="btn btn-secondary" onclick="goToSection('advanced')">Start</button>
+                </div>
+
+                <div class="progress-card expert">
+                    <div class="card-header">
+                        <h3>⭐ Expert</h3>
+                        <span class="progress-badge" id="expertProgress">0/6</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="expertBar" style="width: 0%"></div>
+                    </div>
+                    <p>Real-world projects, production patterns</p>
+                    <button class="btn btn-secondary" onclick="goToSection('expert')">Start</button>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="recent-activity">
+                <h2>📈 Recent Activity</h2>
+                <div id="activityList" class="activity-list">
+                    <p class="empty-state">Complete your first lesson to see activity here!</p>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2>🎯 Quick Actions</h2>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="showTab('lessons')">
+                        <span class="action-icon">📚</span>
+                        <span class="action-text">Browse Lessons</span>
+                    </button>
+                    <button class="action-btn" onclick="showTab('practice')">
+                        <span class="action-icon">💻</span>
+                        <span class="action-text">Practice Exercises</span>
+                    </button>
+                    <button class="action-btn" onclick="showTab('labs')">
+                        <span class="action-icon">🧪</span>
+                        <span class="action-text">Start a Lab</span>
+                    </button>
+                    <button class="action-btn" onclick="resetProgress()">
+                        <span class="action-icon">🔄</span>
+                        <span class="action-text">Reset Progress</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Lessons Tab -->
+        <div id="lessons" class="tab-content">
+            <h2>📚 Terraform Lessons</h2>
+            <p class="section-intro">Learn Terraform concepts step by step with simple explanations and AWS examples.</p>
+
+            <div class="lessons-container" id="lessonsContainer">
+                <!-- Lessons will be loaded here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="practice" class="tab-content">
+            <h2>💻 Practice Exercises</h2>
+            <p class="section-intro">Apply what you've learned with hands-on exercises.</p>
+
+            <div class="practice-container" id="practiceContainer">
+                <!-- Practice exercises will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Labs Tab -->
+        <div id="labs" class="tab-content">
+            <h2>🧪 Hands-On Labs</h2>
+            <p class="section-intro">Complete guided labs with real AWS infrastructure.</p>
+
+            <div class="labs-container" id="labsContainer">
+                <!-- Labs will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <h2>📖 Learning Resources</h2>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>🔗 Official Documentation</h3>
+                    <ul>
+                        <li><a href="https://www.terraform.io/docs" target="_blank">Terraform Documentation</a></li>
+                        <li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs" target="_blank">AWS Provider Docs</a></li>
+                        <li><a href="https://learn.hashicorp.com/terraform" target="_blank">HashiCorp Learn</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>📺 Video Tutorials</h3>
+                    <ul>
+                        <li><a href="https://www.youtube.com/results?search_query=terraform+tutorial" target="_blank">YouTube Terraform Tutorials</a></li>
+                        <li><a href="https://www.terraform.io/intro" target="_blank">Terraform Introduction Videos</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>💡 Best Practices</h3>
+                    <ul>
+                        <li><a href="https://www.terraform-best-practices.com/" target="_blank">Terraform Best Practices</a></li>
+                        <li><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/terraform-aws-provider-best-practices/introduction.html" target="_blank">AWS + Terraform Best Practices</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🛠️ Tools & Extensions</h3>
+                    <ul>
+                        <li><a href="https://www.terraform.io/downloads" target="_blank">Download Terraform</a></li>
+                        <li><a href="https://aws.amazon.com/cli/" target="_blank">AWS CLI</a></li>
+                        <li><a href="https://github.com/tfsec/tfsec" target="_blank">tfsec (Security Scanner)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cheat-sheet">
+                <h3>⚡ Quick Reference</h3>
+                <div class="command-grid">
+                    <div class="command">
+                        <code>terraform init</code>
+                        <p>Initialize working directory</p>
+                    </div>
+                    <div class="command">
+                        <code>terraform plan</code>
+                        <p>Preview changes</p>
+                    </div>
+                    <div class="command">
+                        <code>terraform apply</code>
+                        <p>Apply changes</p>
+                    </div>
+                    <div class="command">
+                        <code>terraform destroy</code>
+                        <p>Destroy resources</p>
+                    </div>
+                    <div class="command">
+                        <code>terraform fmt</code>
+                        <p>Format code</p>
+                    </div>
+                    <div class="command">
+                        <code>terraform validate</code>
+                        <p>Validate configuration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>💡 Remember to run <code>terraform destroy</code> after practice to avoid AWS charges!</p>
+            <p>Your progress is saved locally in your browser.</p>
+        </footer>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/lessons.js"></script>
+    <script src="assets/js/progress.js"></script>
+</body>
+</html>
