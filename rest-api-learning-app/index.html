@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API & Greasemonkey Script Learning App</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 REST API & Greasemonkey Script Mastery</h1>
+            <p class="tagline">Learn REST APIs and Create Powerful Browser Scripts</p>
+        </header>
+
+        <nav class="sidebar">
+            <h3>Learning Path</h3>
+            <ul class="nav-menu">
+                <li><a href="#intro" class="nav-link active" data-section="intro">Introduction</a></li>
+                <li><a href="#rest-basics" class="nav-link" data-section="rest-basics">REST API Basics</a></li>
+                <li><a href="#http-methods" class="nav-link" data-section="http-methods">HTTP Methods</a></li>
+                <li><a href="#requests-responses" class="nav-link" data-section="requests-responses">Requests & Responses</a></li>
+                <li><a href="#status-codes" class="nav-link" data-section="status-codes">Status Codes</a></li>
+                <li><a href="#headers-auth" class="nav-link" data-section="headers-auth">Headers & Auth</a></li>
+                <li><a href="#data-formats" class="nav-link" data-section="data-formats">Data Formats</a></li>
+                <li><a href="#greasemonkey-intro" class="nav-link" data-section="greasemonkey-intro">Greasemonkey Basics</a></li>
+                <li><a href="#gm-api-calls" class="nav-link" data-section="gm-api-calls">API Calls in Scripts</a></li>
+                <li><a href="#exercises" class="nav-link" data-section="exercises">Exercises</a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects">Real Projects</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <!-- Introduction Section -->
+            <section id="intro" class="section active">
+                <h2>Welcome to REST API & Greasemonkey Learning!</h2>
+                <p>This interactive guide will teach you:</p>
+                <ul>
+                    <li>What REST APIs are and how they work</li>
+                    <li>How to make API requests and handle responses</li>
+                    <li>How to create powerful Greasemonkey scripts that interact with APIs</li>
+                    <li>Practical exercises to build real-world skills</li>
+                </ul>
+
+                <div class="info-box">
+                    <h3>Why Learn This?</h3>
+                    <p>Greasemonkey scripts are powerful browser automation tools that can:</p>
+                    <ul>
+                        <li>Enhance websites with custom features</li>
+                        <li>Fetch data from APIs to enrich web pages</li>
+                        <li>Automate repetitive tasks</li>
+                        <li>Create custom dashboards from multiple data sources</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>What You'll Build</h4>
+                    <p>By the end of this course, you'll create scripts that can:</p>
+                    <ul>
+                        <li>Fetch weather data and display it on any webpage</li>
+                        <li>Monitor stock prices in real-time</li>
+                        <li>Auto-fill forms with data from APIs</li>
+                        <li>Create custom notifications from web services</li>
+                    </ul>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('rest-basics')">Start Learning →</button>
+            </section>
+
+            <!-- REST API Basics Section -->
+            <section id="rest-basics" class="section">
+                <h2>What is a REST API?</h2>
+
+                <div class="concept-box">
+                    <h3>Simple Explanation</h3>
+                    <p>Think of a REST API as a waiter in a restaurant:</p>
+                    <ul>
+                        <li><strong>You (Client):</strong> The customer who wants something</li>
+                        <li><strong>API (Waiter):</strong> Takes your request to the kitchen</li>
+                        <li><strong>Server (Kitchen):</strong> Prepares what you requested</li>
+                        <li><strong>Response:</strong> The waiter brings you your food</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>Technical Definition</h3>
+                    <p><strong>REST</strong> stands for <strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer.</p>
+                    <p>It's a way for computers to talk to each other over the internet using standard HTTP methods.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Real-World Example</h4>
+                    <p>When you check the weather on your phone:</p>
+                    <pre><code>Your App → (Request) → Weather API
+Weather API → (Response with data) → Your App
+Your App → Displays "72°F, Sunny"</code></pre>
+                </div>
+
+                <h3>Key REST Principles</h3>
+                <ol>
+                    <li><strong>Client-Server:</strong> Your script (client) talks to a server</li>
+                    <li><strong>Stateless:</strong> Each request is independent (server doesn't remember you)</li>
+                    <li><strong>Uniform Interface:</strong> All APIs work similarly (GET, POST, etc.)</li>
+                    <li><strong>Resources:</strong> Everything is a "resource" with a URL (like /users, /posts)</li>
+                </ol>
+
+                <button class="btn-primary" onclick="goToSection('http-methods')">Next: HTTP Methods →</button>
+            </section>
+
+            <!-- HTTP Methods Section -->
+            <section id="http-methods" class="section">
+                <h2>HTTP Methods (Verbs)</h2>
+
+                <p>HTTP methods tell the API what you want to do. Think of them as action words:</p>
+
+                <div class="method-grid">
+                    <div class="method-card get">
+                        <h3>GET</h3>
+                        <p class="method-action">Retrieve/Read Data</p>
+                        <p>Like asking "Can I see the menu?"</p>
+                        <div class="code-example">
+                            <code>GET /api/users/123</code>
+                            <p class="code-desc">Get information about user #123</p>
+                        </div>
+                    </div>
+
+                    <div class="method-card post">
+                        <h3>POST</h3>
+                        <p class="method-action">Create New Data</p>
+                        <p>Like saying "I'd like to place an order"</p>
+                        <div class="code-example">
+                            <code>POST /api/users</code>
+                            <p class="code-desc">Create a new user</p>
+                        </div>
+                    </div>
+
+                    <div class="method-card put">
+                        <h3>PUT</h3>
+                        <p class="method-action">Update/Replace Data</p>
+                        <p>Like saying "Change my entire order"</p>
+                        <div class="code-example">
+                            <code>PUT /api/users/123</code>
+                            <p class="code-desc">Replace all data for user #123</p>
+                        </div>
+                    </div>
+
+                    <div class="method-card patch">
+                        <h3>PATCH</h3>
+                        <p class="method-action">Partially Update Data</p>
+                        <p>Like saying "Just add extra cheese"</p>
+                        <div class="code-example">
+                            <code>PATCH /api/users/123</code>
+                            <p class="code-desc">Update only specific fields of user #123</p>
+                        </div>
+                    </div>
+
+                    <div class="method-card delete">
+                        <h3>DELETE</h3>
+                        <p class="method-action">Remove Data</p>
+                        <p>Like saying "Cancel my order"</p>
+                        <div class="code-example">
+                            <code>DELETE /api/users/123</code>
+                            <p class="code-desc">Delete user #123</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Try It: HTTP Method Practice</h3>
+                    <p>What method would you use for these tasks?</p>
+                    <div class="quiz">
+                        <div class="quiz-question">
+                            <p>1. You want to see a list of all products:</p>
+                            <button class="quiz-btn" onclick="checkAnswer(this, true)">GET</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">POST</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">DELETE</button>
+                        </div>
+                        <div class="quiz-question">
+                            <p>2. You want to add a new blog post:</p>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">GET</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, true)">POST</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">PATCH</button>
+                        </div>
+                        <div class="quiz-question">
+                            <p>3. You want to update your email address:</p>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">GET</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">POST</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, true)">PATCH</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('requests-responses')">Next: Requests & Responses →</button>
+            </section>
+
+            <!-- Requests & Responses Section -->
+            <section id="requests-responses" class="section">
+                <h2>Understanding Requests & Responses</h2>
+
+                <div class="two-column">
+                    <div class="column">
+                        <h3>📤 Request (What You Send)</h3>
+                        <div class="concept-box">
+                            <h4>Request Components:</h4>
+                            <ol>
+                                <li><strong>URL:</strong> Where to send the request</li>
+                                <li><strong>Method:</strong> What action (GET, POST, etc.)</li>
+                                <li><strong>Headers:</strong> Metadata (like content type, auth)</li>
+                                <li><strong>Body:</strong> Data you're sending (for POST/PUT)</li>
+                            </ol>
+                        </div>
+
+                        <div class="code-block">
+                            <h4>Example Request:</h4>
+                            <pre><code>GET /api/users/123 HTTP/1.1
+Host: example.com
+Authorization: Bearer abc123
+Content-Type: application/json</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <h3>📥 Response (What You Get Back)</h3>
+                        <div class="concept-box">
+                            <h4>Response Components:</h4>
+                            <ol>
+                                <li><strong>Status Code:</strong> Success or error (200, 404, etc.)</li>
+                                <li><strong>Headers:</strong> Metadata about the response</li>
+                                <li><strong>Body:</strong> The actual data (usually JSON)</li>
+                            </ol>
+                        </div>
+
+                        <div class="code-block">
+                            <h4>Example Response:</h4>
+                            <pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "name": "John Doe",
+  "email": "john@example.com"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Real-World Flow</h3>
+                    <pre><code>// 1. You want user data
+Request: GET https://api.example.com/users/123
+
+// 2. Server processes request
+
+// 3. Server sends response
+Response:
+{
+  "status": 200,
+  "data": {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "joined": "2024-01-15"
+  }
+}
+
+// 4. Your script uses the data
+console.log(data.name); // "John Doe"</code></pre>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('status-codes')">Next: Status Codes →</button>
+            </section>
+
+            <!-- Status Codes Section -->
+            <section id="status-codes" class="section">
+                <h2>HTTP Status Codes</h2>
+
+                <p>Status codes tell you if your request succeeded or failed. They're like traffic lights:</p>
+
+                <div class="status-grid">
+                    <div class="status-card success">
+                        <h3>2xx - Success ✅</h3>
+                        <ul>
+                            <li><strong>200 OK:</strong> Request succeeded, here's your data</li>
+                            <li><strong>201 Created:</strong> Successfully created new resource</li>
+                            <li><strong>204 No Content:</strong> Success, but no data to return</li>
+                        </ul>
+                    </div>
+
+                    <div class="status-card redirect">
+                        <h3>3xx - Redirection ↪️</h3>
+                        <ul>
+                            <li><strong>301 Moved Permanently:</strong> Resource moved to new URL</li>
+                            <li><strong>304 Not Modified:</strong> Cached version is still valid</li>
+                        </ul>
+                    </div>
+
+                    <div class="status-card client-error">
+                        <h3>4xx - Client Errors ⚠️</h3>
+                        <ul>
+                            <li><strong>400 Bad Request:</strong> Your request is malformed</li>
+                            <li><strong>401 Unauthorized:</strong> You need to log in</li>
+                            <li><strong>403 Forbidden:</strong> You don't have permission</li>
+                            <li><strong>404 Not Found:</strong> Resource doesn't exist</li>
+                            <li><strong>429 Too Many Requests:</strong> Slow down!</li>
+                        </ul>
+                    </div>
+
+                    <div class="status-card server-error">
+                        <h3>5xx - Server Errors 🔥</h3>
+                        <ul>
+                            <li><strong>500 Internal Server Error:</strong> Server crashed</li>
+                            <li><strong>503 Service Unavailable:</strong> Server is down/overloaded</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>How to Handle Status Codes in Code</h3>
+                    <pre><code>// Check status code in response
+if (response.status === 200) {
+    console.log("Success!", response.data);
+} else if (response.status === 404) {
+    console.log("Not found - check your URL");
+} else if (response.status === 401) {
+    console.log("Need to authenticate first");
+} else if (response.status >= 500) {
+    console.log("Server error - try again later");
+}</code></pre>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('headers-auth')">Next: Headers & Auth →</button>
+            </section>
+
+            <!-- Headers & Auth Section -->
+            <section id="headers-auth" class="section">
+                <h2>Headers & Authentication</h2>
+
+                <div class="concept-box">
+                    <h3>What are Headers?</h3>
+                    <p>Headers are metadata about your request/response. Think of them as the envelope of a letter - they contain information about the contents.</p>
+                </div>
+
+                <h3>Common Request Headers</h3>
+                <div class="header-list">
+                    <div class="header-item">
+                        <h4>Content-Type</h4>
+                        <p>Tells server what format you're sending</p>
+                        <code>Content-Type: application/json</code>
+                    </div>
+
+                    <div class="header-item">
+                        <h4>Accept</h4>
+                        <p>Tells server what format you want back</p>
+                        <code>Accept: application/json</code>
+                    </div>
+
+                    <div class="header-item">
+                        <h4>Authorization</h4>
+                        <p>Proves who you are (credentials)</p>
+                        <code>Authorization: Bearer YOUR_TOKEN</code>
+                    </div>
+
+                    <div class="header-item">
+                        <h4>User-Agent</h4>
+                        <p>Identifies your application</p>
+                        <code>User-Agent: MyScript/1.0</code>
+                    </div>
+                </div>
+
+                <h3>Authentication Methods</h3>
+
+                <div class="auth-grid">
+                    <div class="auth-card">
+                        <h4>1. API Keys</h4>
+                        <p>Simple string token</p>
+                        <pre><code>// In URL
+GET /api/data?api_key=abc123
+
+// In Header
+headers: {
+  'X-API-Key': 'abc123'
+}</code></pre>
+                    </div>
+
+                    <div class="auth-card">
+                        <h4>2. Bearer Tokens</h4>
+                        <p>Most common for modern APIs</p>
+                        <pre><code>headers: {
+  'Authorization': 'Bearer eyJhbGc...'
+}</code></pre>
+                    </div>
+
+                    <div class="auth-card">
+                        <h4>3. Basic Auth</h4>
+                        <p>Username and password</p>
+                        <pre><code>// Encoded as base64
+headers: {
+  'Authorization': 'Basic dXNlcjpwYXNz'
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Security Tips</h4>
+                    <ul>
+                        <li>Never share API keys publicly</li>
+                        <li>Use HTTPS (not HTTP) for secure transmission</li>
+                        <li>Rotate API keys regularly</li>
+                        <li>Don't commit API keys to GitHub!</li>
+                    </ul>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('data-formats')">Next: Data Formats →</button>
+            </section>
+
+            <!-- Data Formats Section -->
+            <section id="data-formats" class="section">
+                <h2>Data Formats: JSON & XML</h2>
+
+                <div class="format-comparison">
+                    <div class="format-card">
+                        <h3>JSON (JavaScript Object Notation)</h3>
+                        <p class="format-desc">Most popular format - easy to read and use</p>
+
+                        <div class="code-block">
+                            <h4>JSON Example:</h4>
+                            <pre><code>{
+  "user": {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "active": true,
+    "tags": ["developer", "beginner"],
+    "address": {
+      "city": "New York",
+      "country": "USA"
+    }
+  }
+}</code></pre>
+                        </div>
+
+                        <h4>Working with JSON:</h4>
+                        <pre><code>// Parse JSON string to object
+const obj = JSON.parse(jsonString);
+console.log(obj.user.name); // "John Doe"
+
+// Convert object to JSON string
+const json = JSON.stringify(obj);
+console.log(json);</code></pre>
+                    </div>
+
+                    <div class="format-card">
+                        <h3>XML (eXtensible Markup Language)</h3>
+                        <p class="format-desc">Older format - still used by some APIs</p>
+
+                        <div class="code-block">
+                            <h4>XML Example:</h4>
+                            <pre><code>&lt;user&gt;
+  &lt;id&gt;123&lt;/id&gt;
+  &lt;name&gt;John Doe&lt;/name&gt;
+  &lt;email&gt;john@example.com&lt;/email&gt;
+  &lt;active&gt;true&lt;/active&gt;
+  &lt;tags&gt;
+    &lt;tag&gt;developer&lt;/tag&gt;
+    &lt;tag&gt;beginner&lt;/tag&gt;
+  &lt;/tags&gt;
+&lt;/user&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>Why JSON is Preferred</h3>
+                    <ul>
+                        <li>Lighter weight (less data to transfer)</li>
+                        <li>Native to JavaScript (easy to use)</li>
+                        <li>Easier for humans to read</li>
+                        <li>Faster to parse</li>
+                    </ul>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('greasemonkey-intro')">Next: Greasemonkey Basics →</button>
+            </section>
+
+            <!-- Greasemonkey Intro Section -->
+            <section id="greasemonkey-intro" class="section">
+                <h2>Introduction to Greasemonkey/Tampermonkey Scripts</h2>
+
+                <div class="concept-box">
+                    <h3>What are Userscripts?</h3>
+                    <p>Userscripts (Greasemonkey/Tampermonkey scripts) are JavaScript programs that run in your browser to modify web pages or add new features.</p>
+                </div>
+
+                <h3>What Can You Do?</h3>
+                <div class="capability-grid">
+                    <div class="capability-card">
+                        <h4>🎨 Modify Appearance</h4>
+                        <p>Change colors, layout, remove ads</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4>📊 Add Data</h4>
+                        <p>Fetch and display data from APIs</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4>⚡ Automate</h4>
+                        <p>Auto-fill forms, click buttons</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4>🔧 Enhance</h4>
+                        <p>Add new features to websites</p>
+                    </div>
+                </div>
+
+                <h3>Basic Script Structure</h3>
+                <div class="code-block">
+                    <pre><code>// ==UserScript==
+// @name         My First Script
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Enhances the webpage
+// @author       You
+// @match        https://example.com/*
+// @grant        GM_xmlhttpRequest
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your code here
+    console.log('Script is running!');
+
+})();</code></pre>
+                </div>
+
+                <h3>Metadata Block Explained</h3>
+                <div class="metadata-explanation">
+                    <div class="metadata-item">
+                        <code>@name</code> - Name of your script
+                    </div>
+                    <div class="metadata-item">
+                        <code>@version</code> - Version number
+                    </div>
+                    <div class="metadata-item">
+                        <code>@description</code> - What your script does
+                    </div>
+                    <div class="metadata-item">
+                        <code>@match</code> - Which websites to run on
+                    </div>
+                    <div class="metadata-item">
+                        <code>@grant</code> - Special permissions needed
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3>Simple Example: Add Text to Page</h3>
+                    <pre><code>// ==UserScript==
+// @name         Hello World
+// @match        https://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Create a div element
+    const div = document.createElement('div');
+    div.textContent = 'Hello from Greasemonkey!';
+    div.style.cssText = 'position:fixed; top:10px; right:10px; background:yellow; padding:10px; z-index:9999;';
+
+    // Add it to the page
+    document.body.appendChild(div);
+})();</code></pre>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('gm-api-calls')">Next: API Calls in Scripts →</button>
+            </section>
+
+            <!-- GM API Calls Section -->
+            <section id="gm-api-calls" class="section">
+                <h2>Making API Calls in Greasemonkey Scripts</h2>
+
+                <div class="info-box">
+                    <h3>Why Use GM_xmlhttpRequest?</h3>
+                    <p>Regular <code>fetch()</code> or <code>XMLHttpRequest</code> are blocked by CORS (Cross-Origin Resource Sharing). Greasemonkey's <code>GM_xmlhttpRequest</code> bypasses this restriction.</p>
+                </div>
+
+                <h3>Basic Syntax</h3>
+                <div class="code-block">
+                    <pre><code>// Remember to add @grant GM_xmlhttpRequest in metadata!
+
+GM_xmlhttpRequest({
+    method: "GET",
+    url: "https://api.example.com/data",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    onload: function(response) {
+        // Success! Handle the response
+        console.log(response.responseText);
+    },
+    onerror: function(error) {
+        // Handle errors
+        console.error("Request failed:", error);
+    }
+});</code></pre>
+                </div>
+
+                <h3>GET Request Example</h3>
+                <div class="example-box">
+                    <h4>Fetch Weather Data</h4>
+                    <pre><code>// ==UserScript==
+// @name         Weather Display
+// @match        https://*/*
+// @grant        GM_xmlhttpRequest
+// @connect      api.openweathermap.org
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const API_KEY = 'your_api_key_here';
+    const CITY = 'London';
+
+    GM_xmlhttpRequest({
+        method: "GET",
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric`,
+        onload: function(response) {
+            const data = JSON.parse(response.responseText);
+
+            // Create display element
+            const weatherDiv = document.createElement('div');
+            weatherDiv.innerHTML = `
+                <strong>Weather in ${data.name}:</strong><br>
+                Temperature: ${data.main.temp}°C<br>
+                Conditions: ${data.weather[0].description}
+            `;
+            weatherDiv.style.cssText = 'position:fixed; top:10px; right:10px; background:lightblue; padding:15px; border-radius:5px; z-index:9999;';
+
+            document.body.appendChild(weatherDiv);
+        },
+        onerror: function(error) {
+            console.error("Weather fetch failed:", error);
+        }
+    });
+})();</code></pre>
+                </div>
+
+                <h3>POST Request Example</h3>
+                <div class="example-box">
+                    <h4>Send Data to API</h4>
+                    <pre><code>GM_xmlhttpRequest({
+    method: "POST",
+    url: "https://api.example.com/users",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_TOKEN"
+    },
+    data: JSON.stringify({
+        name: "John Doe",
+        email: "john@example.com"
+    }),
+    onload: function(response) {
+        if (response.status === 201) {
+            console.log("User created!");
+            const newUser = JSON.parse(response.responseText);
+            console.log("New user ID:", newUser.id);
+        }
+    }
+});</code></pre>
+                </div>
+
+                <h3>Important Parameters</h3>
+                <div class="params-grid">
+                    <div class="param-card">
+                        <h4>method</h4>
+                        <p>"GET", "POST", "PUT", "DELETE", etc.</p>
+                    </div>
+                    <div class="param-card">
+                        <h4>url</h4>
+                        <p>API endpoint to call</p>
+                    </div>
+                    <div class="param-card">
+                        <h4>headers</h4>
+                        <p>Object with header key-value pairs</p>
+                    </div>
+                    <div class="param-card">
+                        <h4>data</h4>
+                        <p>Body content (for POST/PUT)</p>
+                    </div>
+                    <div class="param-card">
+                        <h4>onload</h4>
+                        <p>Function called on success</p>
+                    </div>
+                    <div class="param-card">
+                        <h4>onerror</h4>
+                        <p>Function called on failure</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Don't Forget @connect!</h4>
+                    <p>Add <code>@connect</code> directive for each domain you'll call:</p>
+                    <pre><code>// @connect api.example.com
+// @connect api.weather.com</code></pre>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('exercises')">Next: Practice Exercises →</button>
+            </section>
+
+            <!-- Exercises Section -->
+            <section id="exercises" class="section">
+                <h2>Interactive Exercises</h2>
+
+                <div class="exercise">
+                    <h3>Exercise 1: Random Quote Fetcher</h3>
+                    <div class="exercise-desc">
+                        <p><strong>Goal:</strong> Create a script that fetches a random quote and displays it on any webpage.</p>
+                        <p><strong>API:</strong> https://api.quotable.io/random</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Use GM_xmlhttpRequest to fetch the quote</li>
+                            <li>Display the quote and author in a styled div</li>
+                            <li>Position it in the bottom-right corner</li>
+                            <li>Add a button to fetch a new quote</li>
+                        </ul>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleSolution('solution1')">Show Solution</button>
+
+                    <div id="solution1" class="solution" style="display:none;">
+                        <pre><code>// ==UserScript==
+// @name         Random Quote Display
+// @match        https://*/*
+// @grant        GM_xmlhttpRequest
+// @connect      api.quotable.io
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Create container
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed; bottom:20px; right:20px; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); max-width:300px; z-index:9999;';
+
+    const quoteText = document.createElement('p');
+    quoteText.style.cssText = 'margin:0 0 10px 0; font-style:italic;';
+
+    const authorText = document.createElement('p');
+    authorText.style.cssText = 'margin:0 0 10px 0; font-weight:bold; text-align:right;';
+
+    const refreshBtn = document.createElement('button');
+    refreshBtn.textContent = 'New Quote';
+    refreshBtn.style.cssText = 'padding:8px 16px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;';
+
+    container.appendChild(quoteText);
+    container.appendChild(authorText);
+    container.appendChild(refreshBtn);
+    document.body.appendChild(container);
+
+    // Function to fetch quote
+    function fetchQuote() {
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: "https://api.quotable.io/random",
+            onload: function(response) {
+                const data = JSON.parse(response.responseText);
+                quoteText.textContent = `"${data.content}"`;
+                authorText.textContent = `- ${data.author}`;
+            },
+            onerror: function(error) {
+                quoteText.textContent = "Failed to load quote";
+                console.error(error);
+            }
+        });
+    }
+
+    // Initial fetch
+    fetchQuote();
+
+    // Fetch new quote on button click
+    refreshBtn.addEventListener('click', fetchQuote);
+})();</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>Exercise 2: GitHub User Info</h3>
+                    <div class="exercise-desc">
+                        <p><strong>Goal:</strong> Create a script that shows GitHub user information.</p>
+                        <p><strong>API:</strong> https://api.github.com/users/{username}</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Add an input field to enter a GitHub username</li>
+                            <li>Fetch user data when button is clicked</li>
+                            <li>Display: avatar, name, bio, public repos count</li>
+                            <li>Handle errors (user not found)</li>
+                        </ul>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleSolution('solution2')">Show Solution</button>
+
+                    <div id="solution2" class="solution" style="display:none;">
+                        <pre><code>// ==UserScript==
+// @name         GitHub User Info
+// @match        https://*/*
+// @grant        GM_xmlhttpRequest
+// @connect      api.github.com
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Create UI
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed; top:20px; right:20px; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); min-width:250px; z-index:9999;';
+
+    const input = document.createElement('input');
+    input.placeholder = 'GitHub username';
+    input.style.cssText = 'width:100%; padding:8px; margin-bottom:10px; border:1px solid #ddd; border-radius:4px;';
+
+    const searchBtn = document.createElement('button');
+    searchBtn.textContent = 'Search';
+    searchBtn.style.cssText = 'padding:8px 16px; background:#28a745; color:white; border:none; border-radius:5px; cursor:pointer; width:100%;';
+
+    const resultDiv = document.createElement('div');
+    resultDiv.style.cssText = 'margin-top:15px;';
+
+    container.appendChild(input);
+    container.appendChild(searchBtn);
+    container.appendChild(resultDiv);
+    document.body.appendChild(container);
+
+    // Search function
+    searchBtn.addEventListener('click', function() {
+        const username = input.value.trim();
+        if (!username) {
+            resultDiv.innerHTML = '<p style="color:red;">Please enter a username</p>';
+            return;
+        }
+
+        resultDiv.innerHTML = '<p>Loading...</p>';
+
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: `https://api.github.com/users/${username}`,
+            onload: function(response) {
+                if (response.status === 200) {
+                    const user = JSON.parse(response.responseText);
+                    resultDiv.innerHTML = `
+                        <img src="${user.avatar_url}" style="width:100px; border-radius:50%; display:block; margin:10px auto;">
+                        <h3 style="margin:10px 0; text-align:center;">${user.name || user.login}</h3>
+                        <p style="margin:5px 0;"><strong>Bio:</strong> ${user.bio || 'N/A'}</p>
+                        <p style="margin:5px 0;"><strong>Public Repos:</strong> ${user.public_repos}</p>
+                        <p style="margin:5px 0;"><strong>Followers:</strong> ${user.followers}</p>
+                        <a href="${user.html_url}" target="_blank" style="color:#007bff;">View Profile</a>
+                    `;
+                } else if (response.status === 404) {
+                    resultDiv.innerHTML = '<p style="color:red;">User not found!</p>';
+                } else {
+                    resultDiv.innerHTML = '<p style="color:red;">Error loading user</p>';
+                }
+            },
+            onerror: function() {
+                resultDiv.innerHTML = '<p style="color:red;">Network error</p>';
+            }
+        });
+    });
+})();</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>Exercise 3: Currency Converter</h3>
+                    <div class="exercise-desc">
+                        <p><strong>Goal:</strong> Create a currency converter widget.</p>
+                        <p><strong>API:</strong> https://api.exchangerate-api.com/v4/latest/USD</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Fetch current exchange rates</li>
+                            <li>Create input for amount and dropdowns for currencies</li>
+                            <li>Convert between currencies in real-time</li>
+                        </ul>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleSolution('solution3')">Show Hint</button>
+
+                    <div id="solution3" class="solution" style="display:none;">
+                        <p><strong>Hints:</strong></p>
+                        <ul>
+                            <li>Parse the rates object from the API response</li>
+                            <li>Create two dropdowns with common currencies (USD, EUR, GBP, JPY)</li>
+                            <li>Use the formula: amount * rates[toCurrency] / rates[fromCurrency]</li>
+                            <li>Add event listeners to update conversion on input change</li>
+                        </ul>
+                        <p><em>Try building this yourself! It's similar to exercises 1 and 2.</em></p>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="goToSection('projects')">Next: Real Projects →</button>
+            </section>
+
+            <!-- Real Projects Section -->
+            <section id="projects" class="section">
+                <h2>Real-World Project Ideas</h2>
+
+                <p>Now that you understand the basics, here are advanced projects to build your skills:</p>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>1. Price Tracker</h3>
+                        <p><strong>Difficulty:</strong> Intermediate</p>
+                        <p>Track prices on e-commerce sites and alert when they drop.</p>
+                        <ul>
+                            <li>Extract price from page DOM</li>
+                            <li>Store history using GM_setValue</li>
+                            <li>Show price graph over time</li>
+                            <li>Send notifications on drops</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>2. Social Media Enhancer</h3>
+                        <p><strong>Difficulty:</strong> Intermediate</p>
+                        <p>Add custom features to social media sites.</p>
+                        <ul>
+                            <li>Fetch additional user data from API</li>
+                            <li>Add custom filters and sorting</li>
+                            <li>Auto-hide certain content types</li>
+                            <li>Add custom UI elements</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>3. Multi-Site Dashboard</h3>
+                        <p><strong>Difficulty:</strong> Advanced</p>
+                        <p>Create a dashboard that aggregates data from multiple APIs.</p>
+                        <ul>
+                            <li>Fetch from weather, stocks, news APIs</li>
+                            <li>Display in unified interface</li>
+                            <li>Auto-refresh data periodically</li>
+                            <li>Allow user customization</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>4. Form Auto-Filler</h3>
+                        <p><strong>Difficulty:</strong> Intermediate</p>
+                        <p>Automatically fill forms with data from API or storage.</p>
+                        <ul>
+                            <li>Detect form fields on page</li>
+                            <li>Match fields to stored data</li>
+                            <li>Fill in with one click</li>
+                            <li>Support multiple profiles</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>5. API Monitor</h3>
+                        <p><strong>Difficulty:</strong> Advanced</p>
+                        <p>Monitor API endpoints and track changes.</p>
+                        <ul>
+                            <li>Poll API at intervals</li>
+                            <li>Detect data changes</li>
+                            <li>Display notifications</li>
+                            <li>Log change history</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>6. Content Translator</h3>
+                        <p><strong>Difficulty:</strong> Intermediate</p>
+                        <p>Translate web page content using translation API.</p>
+                        <ul>
+                            <li>Detect page language</li>
+                            <li>Send text to translation API</li>
+                            <li>Replace content with translation</li>
+                            <li>Add language selector</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tips-box">
+                    <h3>Tips for Success</h3>
+                    <ul>
+                        <li><strong>Start Small:</strong> Begin with simple features, then expand</li>
+                        <li><strong>Test Often:</strong> Test each feature as you build it</li>
+                        <li><strong>Read API Docs:</strong> Always check the API documentation</li>
+                        <li><strong>Handle Errors:</strong> Always include error handling</li>
+                        <li><strong>Respect Rate Limits:</strong> Don't spam APIs with requests</li>
+                        <li><strong>Use Console:</strong> console.log() is your best debugging friend</li>
+                    </ul>
+                </div>
+
+                <div class="resources-box">
+                    <h3>Useful Resources</h3>
+                    <ul>
+                        <li><a href="https://www.tampermonkey.net/documentation.php" target="_blank">Tampermonkey Documentation</a></li>
+                        <li><a href="https://github.com/public-apis/public-apis" target="_blank">Public APIs List</a></li>
+                        <li><a href="https://greasyfork.org/" target="_blank">Greasy Fork (Script Repository)</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript Docs</a></li>
+                    </ul>
+                </div>
+
+                <div class="congratulations-box">
+                    <h2>Congratulations!</h2>
+                    <p>You now have the knowledge to create powerful Greasemonkey scripts that interact with REST APIs. Keep practicing, experiment with different APIs, and build amazing tools!</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/exercises.js"></script>
+</body>
+</html>
